@@ -1,8 +1,8 @@
 #!/bin/bash
-# day1.sh
+# day1-part1.sh
 
 if [ $# -lt 1 ]; then
-    echo "Usage: ./day1.sh INPUT_FILE"
+    echo "Usage: ./day1-part1.sh INPUT_FILE"
     exit 1
 fi
 
@@ -11,4 +11,4 @@ do
     (( sum+=($line/3-2) ))
 done < "$1"
 
-echo $sum
+echo "Simple sum: \t$sum"
