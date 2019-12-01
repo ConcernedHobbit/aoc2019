@@ -11,4 +11,4 @@ do
     (( sum+=($line/3-2) ))
 done < "$1"
 
-echo "Simple sum: \t$sum"
+echo -e "Simple sum: \t$sum"
