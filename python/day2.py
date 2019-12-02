@@ -12,7 +12,6 @@ def calc(input_file, noun=12, verb=2):
     l = f.readline().rstrip().split(',')
     l = list(map(int, l))
 
-    # 1202 program alarm state
     l[1] = noun
     l[2] = verb
 
@@ -32,14 +31,22 @@ def calc(input_file, noun=12, verb=2):
 
     return l[0]
 
+def search(target):
+    for n in range(100):
+        for v in range(100):
+            if calc(input_file, n, v) == target:
+                return [n, v]
+    return []
+
 input_file = sys.argv[1]
 print("Part 1 answer: {}".format(calc(input_file)))
 
-if (len(sys.argv) - 1 == 2):
+if (len(sys.argv) == 3):
     target_output = int(sys.argv[2])
-    for n in range(100):
-        for v in range(100):
-            if calc(input_file, n, v) == target_output:
-                print("Part 2 answer: {}".format(100 * n + v))
-                break
-    
+    solution = search(target_output)
+
+    if (len(solution) < 2):
+        print("Part 2 answer not found. Malformed input?")
+    else:
+        noun, verb = solution
+        print("Part 2 answer: {}".format(100 * noun + verb))
