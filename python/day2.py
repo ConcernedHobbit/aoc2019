@@ -36,21 +36,24 @@ def search(opcode_list, target):
                 return [n, v]
     return []
 
-## Handling
-input_file = sys.argv[1]
+def main():
+    input_file = sys.argv[1]
 
-f = open(input_file, "r")
-opcode_list = f.readline().rstrip().split(',')
-opcode_list = list(map(int, opcode_list))
+    f = open(input_file, "r")
+    opcode_list = f.readline().rstrip().split(',')
+    opcode_list = list(map(int, opcode_list))
 
-print("Part 1 answer: {}".format(calc(opcode_list)))
+    print("Part 1 answer: {}".format(calc(opcode_list)))
 
-if (len(sys.argv) == 3):
-    target_output = int(sys.argv[2])
-    solution = search(opcode_list, target_output)
+    if (len(sys.argv) == 3):
+        target_output = int(sys.argv[2])
+        solution = search(opcode_list, target_output)
 
-    if (len(solution) < 2):
-        print("Part 2 answer not found. Malformed input?")
-    else:
-        noun, verb = solution
-        print("Part 2 answer: {}".format(100 * noun + verb))
+        if (len(solution) < 2):
+            print("Part 2 answer not found. Malformed input?")
+        else:
+            noun, verb = solution
+            print("Part 2 answer: {}".format(100 * noun + verb))
+
+if __name__ == "__main__":
+    main()
