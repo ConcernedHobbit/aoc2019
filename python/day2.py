@@ -7,21 +7,19 @@ if (len(sys.argv) - 1 < 1):
     print("Usage: day2.py INPUT_FILE [TARGET_OUTPUT]")
     exit(1)
 
-def calc(input_file, noun=12, verb=2):
-    f = open(input_file, "r")
-    l = f.readline().rstrip().split(',')
-    l = list(map(int, l))
+def calc(opcode_list, noun=12, verb=2):
+    list = opcode_list.copy()
 
-    l[1] = noun
-    l[2] = verb
+    list[1] = noun
+    list[2] = verb
 
     i = 0
-    while i < len(l):
-        opcode = l[i]
+    while i < len(list):
+        opcode = list[i]
         if opcode == 1:
-            l[l[i + 3]] = l[l[i+1]] + l[l[i + 2]]
+            list[list[i + 3]] = list[list[i+1]] + list[list[i + 2]]
         elif opcode == 2:
-            l[l[i + 3]] = l[l[i+1]] * l[l[i + 2]]
+            list[list[i + 3]] = list[list[i+1]] * list[list[i + 2]]
         elif opcode == 99:
             break
         else:
@@ -29,21 +27,27 @@ def calc(input_file, noun=12, verb=2):
             exit(1)
         i += 4
 
-    return l[0]
+    return list[0]
 
-def search(target):
+def search(opcode_list, target):
     for n in range(100):
         for v in range(100):
-            if calc(input_file, n, v) == target:
+            if calc(opcode_list, n, v) == target:
                 return [n, v]
     return []
 
+## Handling
 input_file = sys.argv[1]
-print("Part 1 answer: {}".format(calc(input_file)))
+
+f = open(input_file, "r")
+opcode_list = f.readline().rstrip().split(',')
+opcode_list = list(map(int, opcode_list))
+
+print("Part 1 answer: {}".format(calc(opcode_list)))
 
 if (len(sys.argv) == 3):
     target_output = int(sys.argv[2])
-    solution = search(target_output)
+    solution = search(opcode_list, target_output)
 
     if (len(solution) < 2):
         print("Part 2 answer not found. Malformed input?")
