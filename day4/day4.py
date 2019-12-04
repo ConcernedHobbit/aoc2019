@@ -4,7 +4,7 @@ import sys
 
 def main():
     if (len(sys.argv) - 1 < 2):
-        print("Usage: day3.py MIN MAX")
+        print("Usage: day4.py MIN MAX")
         exit(1)
 
     part1 = 0
